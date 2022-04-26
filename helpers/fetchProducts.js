@@ -1,5 +1,5 @@
 const fetchProducts = () => {
-  // seu código aqui
+  fetch("https://api.mercadolibre.com/sites/MLB/search?q=$QUERY")
 };
 
 if (typeof module !== 'undefined') {
