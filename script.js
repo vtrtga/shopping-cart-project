@@ -39,5 +39,17 @@ function createCartItemElement({ sku, name, salePrice }) {
   li.addEventListener('click', cartItemClickListener);
   return li;
 }
-
-window.onload = () => { };
+const implementProductsList = async () => {
+  const pegaItems = document.querySelector('.items');
+  const computador = await fetchProducts('computador');
+  return computador.forEach((product) => {
+    const result = createProductItemElement({
+      sku: product.id, name: product.title, image: product.thumbnail,
+    });
+    pegaItems.appendChild(result);
+  });
+};
+implementProductsList();
+window.onload = async () => {
+await implementProductsList();
+};
