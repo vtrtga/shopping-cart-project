@@ -1,14 +1,16 @@
 const fetchItem = async (itemid) => {
-  const items = await fetch(`https://api.mercadolibre.com/items/${itemid}`)
-  .then((response) => response.json())
-  .catch((err) => console.log(err));
-  return items;
+  try {
+    const catchApi = await fetch(`https://api.mercadolibre.com/items/${itemid}`);
+    const response = await catchApi.json();
+    console.log(response);
+    return response;
+  } catch (error) {
+    return error;
+  }
 };
-
-fetchItem('MLB1341706310');
-
 if (typeof module !== 'undefined') {
   module.exports = {
     fetchItem,
   };
 }
+fetchItem('MLB1341706310');

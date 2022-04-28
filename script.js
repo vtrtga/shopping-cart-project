@@ -29,7 +29,7 @@ function getSkuFromProductItem(item) {
 }
 
 function cartItemClickListener(event) {
-  // coloque seu código aqui
+  event.target.remove();
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
@@ -39,17 +39,41 @@ function createCartItemElement({ sku, name, salePrice }) {
   li.addEventListener('click', cartItemClickListener);
   return li;
 }
+
+const getApiItemById = async (productid) => {
+  const { id, title, price } = await fetchItem(`${productid}`);
+  const objeto = {
+    sku: id,
+    name: title,
+    salePrice: price,
+  };
+  document.querySelector('.cart__items').appendChild(createCartItemElement(objeto));
+};
+
+const getItem = (event) => {
+  const getTarget = event.target.parentNode;
+  const targetId = getTarget.firstChild.innerText;
+  getApiItemById(targetId);
+};
+
 const implementProductsList = async () => {
   const pegaItems = document.querySelector('.items');
   const computador = await fetchProducts('computador');
   return computador.forEach((product) => {
     const result = createProductItemElement({
-      sku: product.id, name: product.title, image: product.thumbnail,
+      sku: product.id,
+      name: product.title,
+      image: product.thumbnail,
     });
     pegaItems.appendChild(result);
+    const buttonId = document.querySelectorAll('.item__add');
+    buttonId.forEach((button) => {
+      button.addEventListener('click', getItem);
+  });
   });
 };
 implementProductsList();
 window.onload = async () => {
 await implementProductsList();
+await sumPrices;
 };
