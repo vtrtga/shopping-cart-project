@@ -71,9 +71,8 @@ const implementProductsList = async () => {
       button.addEventListener('click', getItem);
   });
   });
-};
+};  
 implementProductsList();
 window.onload = async () => {
 await implementProductsList();
-await sumPrices;
 };
