@@ -72,7 +72,6 @@ const implementProductsList = async () => {
   });
   });
 };  
-implementProductsList();
 window.onload = async () => {
 await implementProductsList();
 };
