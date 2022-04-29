@@ -1,9 +1,11 @@
 require('../mocks/fetchSimulator');
+const { before } = require('mocha');
 const { fetchItem } = require('../helpers/fetchItem');
 const saveCartItems = require('../helpers/saveCartItems');
 const item = require('../mocks/item');
 
 describe('2 - Teste a função fecthItem', () => {
+  beforeEach(async() => await fetchItem('MLB1615760527'));
   it('Verifica se fetchItem é uma função', () => {
     expect(typeof fetchItem).toBe('function');
   })
@@ -14,7 +16,7 @@ describe('2 - Teste a função fecthItem', () => {
   })
 
   it('Verifica se a função fetch é chamada com o endpoint, ao usar o argumento computador', async () => {
-    const url = 'https://api.mercadolibre.com/sites/MLB/search?q=computador';
+    const url = 'https://api.mercadolibre.com/items/MLB1615760527';
     const response = await fetchItem('computador');
     expect(fetch).toHaveBeenCalledWith(url);
   })

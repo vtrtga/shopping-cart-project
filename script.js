@@ -41,7 +41,7 @@ function createCartItemElement({ sku, name, salePrice }) {
 }
 
 const getApiItemById = async (productid) => {
-  const { id, title, price } = await fetchItem(`${productid}`);
+  const { id, title, price } = await fetchItem(productid);
   const objeto = {
     sku: id,
     name: title,
