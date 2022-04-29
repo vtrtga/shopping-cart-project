@@ -48,6 +48,7 @@ const getApiItemById = async (productid) => {
     salePrice: price,
   };
   document.querySelector('.cart__items').appendChild(createCartItemElement(objeto));
+  saveCartItems(document.querySelector('.cart__items'));
 };
 
 const getItem = (event) => {
