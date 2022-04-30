@@ -9,7 +9,7 @@ describe('2 - Teste a função fecthItem', () => {
   it('Verifica se fetchItem é uma função', () => {
     expect(typeof fetchItem).toBe('function');
   })
-
+  
   it('Verifica se a função fetch é chamada com o argumento "computador" ', async () => {
     const response = await fetchItem('computador');
     expect(fetch).toReturn();
