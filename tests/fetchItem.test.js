@@ -1,28 +1,25 @@
 require('../mocks/fetchSimulator');
-const { before } = require('mocha');
 const { fetchItem } = require('../helpers/fetchItem');
-const saveCartItems = require('../helpers/saveCartItems');
 const item = require('../mocks/item');
 
 describe('2 - Teste a função fecthItem', () => {
-  beforeEach(async() => await fetchItem('MLB1615760527'));
-  it('Verifica se fetchItem é uma função', () => {
-    expect(typeof fetchItem).toBe('function');
-  })
-  
-  it('Verifica se a função fetch é chamada com o argumento "computador" ', async () => {
-    const response = await fetchItem('computador');
-    expect(fetch).toReturn();
-  })
-
-  it('Verifica se a função fetch é chamada com o endpoint, ao usar o argumento computador', async () => {
-    const url = 'https://api.mercadolibre.com/items/MLB1615760527';
-    const response = await fetchItem('computador');
-    expect(fetch).toHaveBeenCalledWith(url);
-  })
-
-  it('Teste se o retorno da função fetchItem com o argumento do item "MLB1615760527" é uma estrutura de dados igual ao objeto item que já está importado no arquivo', async () => {
+  beforeEach( async () => await fetchItem('MLB1615760527'));
+ 
+  test('Verifica se fetchItem é uma função', () => {
+    expect(typeof fetchItem).toEqual('function')
+  });
+  test('Execute a função fetchItem com o argumento do item "MLB1615760527" e teste se fetch foi chamada', async () => {
+  expect(fetch).toHaveBeenCalled(); 
+  });
+  test('Verifica se ao chamar a função fetchItem com o parâmetro "MLB1615760527", a função fetch utiliza o endpoint ', async () => {
+  expect(fetch).toHaveBeenCalledWith('https://api.mercadolibre.com/items/MLB1615760527');
+  });
+  test('verifica se o retorno da função fetchItem com o parâmetro "MLB1615760527" é uma estrutura de dados igual ao objeto item que já está importado no arquivo', async () => {
     const obj = await fetchItem('MLB1615760527');
     expect(obj).toMatchObject(item);
   });
-});
+  test('Verifica se ao chamar a função fetchProducts sem parâmetro retorna um erro com a mensagem: You must provide an url', async () => {
+    const obj = await fetchItem();
+    expect(obj).toEqual(new Error('You must provide an url'));
+  });
+  });
