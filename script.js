@@ -31,7 +31,9 @@ function getSkuFromProductItem(item) {
 }
 
 function cartItemClickListener(event) {
-  event.target.remove();
+  if (event.target !== cart) {
+    event.target.remove();
+  }
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
@@ -98,4 +100,5 @@ window.onload = async () => {
   await implementProductsList();
   eraseAll();
   cart.innerHTML = getSavedCartItems('cartItems');
+  cart.addEventListener('click', cartItemClickListener);
 };
